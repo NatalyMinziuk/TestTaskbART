@@ -17,7 +17,7 @@ namespace TestTask.DAL.Enteties
         [Required]
         public ICollection<Contact> Contacts { get; set; }
         [DataType(DataType.Text)]
-        public string IncidentId { get; set; }
+        public string? IncidentName { get; set; }
         public Incident? Incident { get; set; }
     }
 }

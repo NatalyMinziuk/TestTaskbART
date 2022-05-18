@@ -12,7 +12,7 @@ using TestTask.DAL;
 namespace TestTask.DAL.Migrations
 {
     [DbContext(typeof(TestTaskDBContext))]
-    [Migration("20220517180628_Initial")]
+    [Migration("20220518103708_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

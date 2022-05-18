@@ -12,8 +12,8 @@ using TestTask.DAL;
 namespace TestTask.DAL.Migrations
 {
     [DbContext(typeof(TestTaskDBContext))]
-    [Migration("20220517193503_AddOptionalFields")]
-    partial class AddOptionalFields
+    [Migration("20220518221251_PRAutoString")]
+    partial class PRAutoString
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,8 +32,7 @@ namespace TestTask.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("IncidentId")
-                        .IsRequired()
+                    b.Property<string>("IncidentName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
@@ -42,7 +41,7 @@ namespace TestTask.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IncidentId");
+                    b.HasIndex("IncidentName");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -76,7 +75,9 @@ namespace TestTask.DAL.Migrations
             modelBuilder.Entity("TestTask.DAL.Enteties.Incident", b =>
                 {
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -91,9 +92,7 @@ namespace TestTask.DAL.Migrations
                 {
                     b.HasOne("TestTask.DAL.Enteties.Incident", "Incident")
                         .WithMany("Accounts")
-                        .HasForeignKey("IncidentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("IncidentName");
 
                     b.Navigation("Incident");
                 });

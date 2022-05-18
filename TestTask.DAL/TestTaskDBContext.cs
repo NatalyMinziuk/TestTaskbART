@@ -23,6 +23,7 @@ namespace TestTask.DAL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Incident>().Property(x => x.Name).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<Account>()
                 .HasIndex(u => u.Name)
                 .IsUnique();
